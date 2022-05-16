@@ -3,5 +3,5 @@ __all__ = [
     "__url__",
 ]
 
-__version__ = "0.9.2"
+__version__ = "0.0.2"
 __url__ = "https://ti.watcherlab.com"

@@ -153,17 +153,17 @@ class ApiLimits(object):
             self.__cycle_start_time = datetime.now()
         elif self.__cycle_query_count >= self.query:
             # 如果自上次请求以来没有经历超过一个周期
-            # 并且此时以及消耗了一个周期内允许的所有次数
+            # 并且此时已经消耗了一个周期内允许的所有次数
             # 我们应当休眠一段时间以进入一个新的时间周期
             # 准确的休眠的时间应该是时间周期减去已经经历的时间
             # time.sleep(self.cycle - elapsed + 0.5)
-            # 但由于多种原因无法设置的很精准所以等待时间我们设置为一个时间周期再加1秒
+            # 但由于多种原因无法设置的如此精准，我们设置为一个时间周期再加1秒
             time.sleep(min(self.cycle + 1, self.__MAX_SLEEP_TIME))
             self.__cycle_query_count = 1
             self.__cycle_start_time = datetime.now()
         else:
-            # 如果不是上述的两种情况则说明距离上次请求之后还没有经历超过一个时间周期但幸运的是我们还有请求次数可以使用
-            # 我们需要消耗一个次数并允许请求
+            # 如果不是上述的两种情况则说明距离上次请求之后还没有经历超过一个时间周期，但幸运的是我们还有请求次数可以使用
+            # 我们需要消耗一个次数并允许此次请求
             self.__cycle_query_count += 1
 
         return True

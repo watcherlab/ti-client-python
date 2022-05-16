@@ -24,7 +24,7 @@ from watcherlab.ti.enum import (
 
 
 class Base(object):
-    __USER_AGENT = __author__ + "/ti/client"
+    __USER_AGENT = __author__ + "ti/client/python"
     __CONTENT_TYPE = "application/json"
     __APIKEY = "X-WatcherLab-ApiKey"
     __ENCODING = "UTF-8"
