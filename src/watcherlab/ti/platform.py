@@ -70,7 +70,7 @@ class Base(object):
 
         return retval
 
-    def download(self, _path: str, _parm: dict = None) -> bytes | None:
+    def download(self, _path: str, _parm: dict = None) -> bytes:
         retval = None
         response = self.request(_path, _parm)
 
@@ -108,7 +108,7 @@ class Core(Base):
     def __make_parm(self, _parm: tuple) -> dict:
         return {"query": [x for x in _parm], "locale": self.__locale}
 
-    def __make_feed_parm(self, _tags: tuple[int], _limits, _confidence, _decision, _inevent):
+    def __make_feed_parm(self, _tags: tuple, _limits, _confidence, _decision, _inevent):
         retval = {"query": {"tags": [x for x in _tags], "limits": _limits, "confidence": _confidence},
                   "locale": self.__locale}
 
@@ -148,11 +148,11 @@ class Core(Base):
         return self.query(self.__make_path(path), self.__make_parm(("__MAKE_POST__",)))
 
     def feed_download(self,
-                      _tags: tuple[int],
+                      _tags: tuple,
                       _limits: int = 100,
                       _confidence: int = 50,
-                      _decision: Decision | None = None,
-                      _inevent: bool | None = None,
+                      _decision: Decision = None,
+                      _inevent: bool = None,
                       _type: IntelligenceType = None):
         path = "/".join([CoreApiPath.INTELLIGENCE_FEED, _type]) if _type else CoreApiPath.INTELLIGENCE_FEED
         self.__into_pipeline(path)

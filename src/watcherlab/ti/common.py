@@ -31,7 +31,7 @@ class Serializer(object):
     def value(self, _key: str):
         return self.__data[_key] if _key in self.__data else None
 
-    def time(self, _key: str, _fmt: str = None) -> datetime | None:
+    def time(self, _key: str, _fmt: str = None) -> datetime:
         data = self.__data[_key]
         if data:
             # 尝试兼容Unix标准时间戳和精确到毫秒的时间戳
@@ -180,7 +180,7 @@ class AccountLimits(object):
     def __str__(self):
         return "{{ApiLimits={}}}".format(self.__limits)
 
-    def limits(self, _path: str) -> ApiLimits | None:
+    def limits(self, _path: str) -> ApiLimits:
         return self.__limits[_path] if _path in self.__limits else None
 
     def lpq(self, _path: str) -> int:
@@ -213,7 +213,7 @@ class RiskMapping(object):
         return 0
 
     @staticmethod
-    def get_name(_code: int) -> str | None:
+    def get_name(_code: int) -> str:
         for k, v in RiskMapping.__MAPPING.items():
             if v == _code:
                 return k
@@ -240,7 +240,7 @@ class DecisionMapping(object):
         return 0
 
     @staticmethod
-    def get_name(_code: int) -> str | None:
+    def get_name(_code: int) -> str:
         for k, v in DecisionMapping.__MAPPING.items():
             if v == _code:
                 return k

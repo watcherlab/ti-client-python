@@ -12,3 +12,7 @@
 ## 下载统计
 
 [![Downloads](https://pepy.tech/badge/watcherlab-ti-client-python)](https://pepy.tech/project/watcherlab-ti-client-python)
+
+## 使用方法
+
+- [简体中文](USAGE_ZH-CN.md)

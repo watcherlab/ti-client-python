@@ -57,17 +57,17 @@ class Record(object):
                "Confidence={0.confidence}, Decision={0.decision}, Description={0.description}}}".format(self)
 
     @property
-    def name(self) -> str | None:
+    def name(self) -> str:
         return self.description if self.__name == self.__TMP_POLICY else self.__name
 
     @name.setter
     def name(self, value):
         self.__name = value
 
-    def get_risk_name(self) -> str | None:
+    def get_risk_name(self) -> str:
         return RiskMapping.get_name(self.risk)
 
-    def get_decision_name(self) -> str | None:
+    def get_decision_name(self) -> str:
         return DecisionMapping.get_name(self.decision)
 
 
@@ -110,7 +110,7 @@ class Origin(object):
             return max(risk_list)
         return 0
 
-    def get_risk_maximum_name(self) -> str | None:
+    def get_risk_maximum_name(self) -> str:
         risk = self.get_risk_maximum()
         return RiskMapping.get_name(risk) if risk else None
 
@@ -121,7 +121,7 @@ class Origin(object):
             return max(decision_list)
         return 0
 
-    def get_decision_maximum_name(self) -> str | None:
+    def get_decision_maximum_name(self) -> str:
         decision = self.get_decision_maximum()
         return DecisionMapping.get_name(decision) if decision else None
 
@@ -179,7 +179,7 @@ class Intelligence(object):
             return max(risk_list)
         return 0
 
-    def get_risk_maximum_name(self) -> str | None:
+    def get_risk_maximum_name(self) -> str:
         risk = self.get_risk_maximum()
         return RiskMapping.get_name(risk) if risk else None
 
@@ -190,7 +190,7 @@ class Intelligence(object):
             return max(decision_list)
         return 0
 
-    def get_decision_maximum_name(self) -> str | None:
+    def get_decision_maximum_name(self) -> str:
         decision = self.get_decision_maximum()
         return DecisionMapping.get_name(decision) if decision else None
 
@@ -209,17 +209,17 @@ class IntelligenceIp(Intelligence):
         return "{{Intelligence={}, Certificate={}}}".format(super(IntelligenceIp, self).__str__(), self.certificate)
 
     @staticmethod
-    def __index_zero(_response: list | None, _key: str):
+    def __index_zero(_response: list, _key: str):
         return _response[0][_key] if _response and _key in _response[0] else None
 
-    def geo(self, _cloud: Cloud) -> GeoIp | None:
+    def geo(self, _cloud: Cloud) -> GeoIp:
         data = self.__index_zero(_cloud.ip_geo(self.data), "data")
         return GeoIp(data) if data else None
 
-    def whois(self, _cloud: Cloud) -> str | None:
+    def whois(self, _cloud: Cloud) -> str:
         return self.__index_zero(_cloud.ip_whois(self.data), "data")
 
-    def autonomous_system(self, _cloud: Cloud) -> list[AutonomousSystem]:
+    def autonomous_system(self, _cloud: Cloud) -> list:
         data = self.__index_zero(_cloud.ip_as(self.data), "data")
         if data:
             return [AutonomousSystem(x) for x in data]
@@ -238,7 +238,7 @@ class IntelligenceDomain(Intelligence):
         return "{{Intelligence={}, Certificate={}}}".format(super(IntelligenceDomain, self).__str__(), self.certificate)
 
     @staticmethod
-    def __index_zero(_response: list | None, _key: str):
+    def __index_zero(_response: list, _key: str):
         return _response[0][_key] if _response and _key in _response[0] else None
 
     # def whois(self, _cloud: Cloud) -> str:

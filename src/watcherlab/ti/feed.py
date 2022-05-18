@@ -27,7 +27,7 @@ class FeedListItem(object):
 
 
 class FeedList(object):
-    items: dict[int, FeedListItem] = dict()
+    items = dict()
 
     def __init__(self, _data: list):
         if not _data:
@@ -55,16 +55,16 @@ class FeedList(object):
                 return True
         return False
 
-    def get_tags(self) -> set[int]:
+    def get_tags(self) -> set:
         return set(self.items.keys())
 
-    def get_names(self) -> set[str]:
+    def get_names(self) -> set:
         retval = set()
         for tag, item in self.items.items():
             retval.add(item.name)
         return retval
 
-    def get_types(self) -> set[str]:
+    def get_types(self) -> set:
         retval = set()
         for tag, item in self.items.items():
             retval.update(item.type)
@@ -95,10 +95,10 @@ class FeedItem(object):
         return "{{Data={0.data}, Type={0.type}, Confidence={0.confidence}, Decision={0.decision}, " \
                "InEvent={0.inevent}, UpdateTime={0.update_time}, Risk={0.risk}}}".format(self)
 
-    def get_risk_name(self) -> str | None:
+    def get_risk_name(self) -> str:
         return RiskMapping.get_name(self.risk)
 
-    def get_decision_name(self) -> str | None:
+    def get_decision_name(self) -> str:
         return DecisionMapping.get_name(self.decision)
 
 
@@ -130,10 +130,10 @@ class Feed(object):
                  *_tags: int,
                  _limits: int = 100,
                  _confidence: int = 50,
-                 _decision: Decision | None = None,
-                 _inevent: bool | None = None,
-                 _type: IntelligenceType = None) -> dict[str, FeedItem]:
-        retval: dict[str, FeedItem] = dict()
+                 _decision: Decision = None,
+                 _inevent: bool = None,
+                 _type: IntelligenceType = None) -> dict:
+        retval: dict = dict()
         result = self.__core.feed_download(_tags, _limits, _confidence, _decision, _inevent, _type)
         for i in result:
             item = FeedItem(i)

@@ -27,7 +27,7 @@ class Querier(object):
         self.__core = _core
         self.__type = _type
 
-    def __query(self, _origin: IntelligenceOrigin, _data: tuple) -> dict[str, Intelligence]:
+    def __query(self, _origin: IntelligenceOrigin, _data: tuple) -> dict:
         retval = {}
         result = self.__core.intelligence(_origin, self.__type, *_data)
 
